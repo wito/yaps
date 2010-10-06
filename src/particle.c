@@ -63,11 +63,15 @@ vector *particleGravity(particle *a, particle *b) {
   
   double G = 0.00001;
   
+  /// experimental - accounts for relativistic effects of relative velocities
+  double x = vectorLength(vectorSubtraction(a->velocity, b->velocity));
+  double X = x * x;
+  
   double M = particleMass(a) * particleMass(b);
   double r = particleDistance(a,b);
   double R = r * r;
   
-  double F = -G * M / R;
+  double F = -G * M * X / R;
   
   vector vec_r = vectorUnit(vectorSubtraction(a->position, b->position));
   retval[0] = vectorMultiply(vec_r, F);
