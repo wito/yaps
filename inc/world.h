@@ -40,6 +40,8 @@ typedef struct {
 universe *universeCreate(particle **);
 void universeDestroy(universe *);
 
+int universeIterate(universe *);
+
 graviton *gravitonCreate(particle *, particle *);
 void gravitonDestroy(graviton *);
 

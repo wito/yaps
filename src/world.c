@@ -66,6 +66,20 @@ void universeDestroy(universe *self) {
 }
 
 
+int universeIterate(universe *self) {
+  self->age++;
+  
+  applyGravitons(self->gravity);
+  advanceParticles(self->particles);
+  
+  fprintf(self->output, "frame # %d\n", self->age);
+  printParticles(self->output, self->particles);
+  fprintf(self->output, "\n");
+  
+  return self->age;
+}
+
+
 graviton *gravitonCreate(particle *a, particle *b) {
   graviton *self = malloc(sizeof(graviton));
   
