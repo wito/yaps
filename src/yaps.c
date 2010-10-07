@@ -39,12 +39,6 @@ int main (int argc, const char **argv) {
   particles[2] = particleCreate(vectorCreate(-3.0,  0.0, 0.0), vectorCreate( 0.0, -0.005, 0.0), 5.0);
   particles[3] = NULL;
   
-  particle *A, *B, *C;
-  
-  A = particles[0];
-  B = particles[1];
-  C = particles[2];
-
   int g_count;
   graviton **G = createGravitons(particles, 3, &g_count);
   
