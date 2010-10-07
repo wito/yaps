@@ -47,5 +47,6 @@ graviton **createGravitons(particle **, int, int *);
 void destroyGravitons(graviton **);
 
 void gravitonApply(graviton *);
+void applyGravitons(graviton **);
 
 #endif // WORLD_H

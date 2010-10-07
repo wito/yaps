@@ -81,6 +81,13 @@ void gravitonApply(graviton *self) {
   free(g);
 }
 
+void applyGravitons(graviton **self) {
+  while (*self) {
+    gravitonApply(*(self++));
+  }
+}
+
+
 graviton **createGravitons(particle **particles, int count, int *gCount) {
   if (count < 0) {
     for (int i = 0; ; i++) {
