@@ -31,7 +31,9 @@
 #include "particle.h"
 #include "world.h"
 
+#ifndef ITERATIONS
 #define ITERATIONS 5
+#endif
 
 int main (int argc, const char **argv) {
   int iterations = ITERATIONS;
