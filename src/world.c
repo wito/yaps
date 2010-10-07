@@ -29,6 +29,36 @@
 
 #include "world.h"
 
+struct universe {
+  particle **particles;
+  graviton **gravity;
+};
+
+universe *universeCreate(particle **particles) {
+  universe *self = malloc(sizeof(universe));
+  
+  self->particles = particles;
+  self->gravity = createGravitons(particles, -1, NULL);
+  
+  return self;
+}
+
+void universeDestroy(universe *self) {
+  int i;
+  particle *p;
+  
+  while((p = self->particles[i++])) {
+    free(p);
+  }
+  
+  free(self->particles);
+  
+  destroyGravitons(self->gravity);
+  
+  free(self);
+}
+
+
 graviton *gravitonCreate(particle *a, particle *b) {
   graviton *self = malloc(sizeof(graviton));
   

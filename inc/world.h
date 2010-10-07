@@ -30,10 +30,15 @@
 
 #include "particle.h"
 
+typedef struct universe universe;
+
 typedef struct {
   particle *a;
   particle *b;
 } graviton;
+
+universe *universeCreate(particle **);
+void universeDestroy(universe *);
 
 graviton *gravitonCreate(particle *, particle *);
 void gravitonDestroy(graviton *);
