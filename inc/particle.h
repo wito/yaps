@@ -51,4 +51,6 @@ double particleDistance(particle *, particle *);
 
 void particlePrint(FILE *, particle *, int);
 
+void advanceParticles(particle **);
+
 #endif // PARTICLE_H

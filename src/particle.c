@@ -91,3 +91,9 @@ void particlePrint(FILE *fp, particle *self, int id) {
   fprintf(fp, "# velocity\n    %10.5f %10.5f %10.5f\n", self->velocity.x, self->velocity.y, self->velocity.z);
   fprintf(fp, "# mass\n    %10.5f\n", particleMass(self));
 }
+
+void advanceParticles(particle **self) {
+  while (*self) {
+    particleAdvance(*(self++));
+  }
+}
