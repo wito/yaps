@@ -64,7 +64,8 @@ graviton **createGravitons(particle **particles, int count, int *gCount) {
   int g_count = count - 1;
   g_count = (1 + g_count)*(g_count / 2.0);
   
-  *gCount = g_count;
+  if (gCount)
+    *gCount = g_count;
   
   graviton **retval = calloc(g_count + 1, sizeof(graviton *));
   
