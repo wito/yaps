@@ -51,9 +51,7 @@ int main (int argc, const char **argv) {
   //printf("%d, g_count\n", g_count);
 
   for (int t = 0; t < 5; t++) {
-    for (int i = 0; i < g_count; i++) {
-      gravitonApply(G[i]);
-    }
+    applyGravitons(G);
     
     particleAdvance(A);
     particleAdvance(B);
