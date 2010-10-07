@@ -97,3 +97,13 @@ void advanceParticles(particle **self) {
     particleAdvance(*(self++));
   }
 }
+
+void printParticles(FILE *fp, particle **self) {
+  for (int i = 0;; i++) {
+    if (self[i]) {
+      particlePrint(fp, self[i], i);
+    } else {
+      return;
+    }
+  }
+}
