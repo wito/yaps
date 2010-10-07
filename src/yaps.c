@@ -31,7 +31,11 @@
 #include "particle.h"
 #include "world.h"
 
+#define ITERATIONS 5
+
 int main (int argc, const char **argv) {
+  int iterations = ITERATIONS;
+  
   particle **particles = calloc(4, sizeof(particle *));
   
   particles[0] = particleCreate(vectorCreate( 3.0,  0.0, 0.0), vectorCreate( 0.0,  0.005, 0.0), 5.0);
@@ -41,7 +45,7 @@ int main (int argc, const char **argv) {
   
   universe *universe = universeCreate(particles);
   
-  for (int t = 0; t < 5; t++) {
+  for (int t = 0; t < iterations; t++) {
     universeIterate(universe);
   }
   
