@@ -63,10 +63,15 @@ vector *particleGravity(particle *a, particle *b) {
   
   double G = 0.00001;
   
+  /// experimental - accounts for relativistic effects of relative velocities
+  // double x = vectorLength(vectorSubtraction(a->velocity, b->velocity));
+  // double X = x * x;
+  
   double M = particleMass(a) * particleMass(b);
   double r = particleDistance(a,b);
   double R = r * r;
   
+  // double F = -G * M * X / R;
   double F = -G * M / R;
   
   vector vec_r = vectorUnit(vectorSubtraction(a->position, b->position));
@@ -85,4 +90,20 @@ void particlePrint(FILE *fp, particle *self, int id) {
   fprintf(fp, "# position\n    %10.5f %10.5f %10.5f\n", self->position.x, self->position.y, self->position.z);
   fprintf(fp, "# velocity\n    %10.5f %10.5f %10.5f\n", self->velocity.x, self->velocity.y, self->velocity.z);
   fprintf(fp, "# mass\n    %10.5f\n", particleMass(self));
+}
+
+void advanceParticles(particle **self) {
+  while (*self) {
+    particleAdvance(*(self++));
+  }
+}
+
+void printParticles(FILE *fp, particle **self) {
+  for (int i = 0;; i++) {
+    if (self[i]) {
+      particlePrint(fp, self[i], i);
+    } else {
+      return;
+    }
+  }
 }

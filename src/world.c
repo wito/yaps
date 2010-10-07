@@ -26,8 +26,59 @@
  */
 
 #include <stdlib.h>
+#include <stdio.h>
 
 #include "world.h"
+
+struct universe {
+  int age;
+  FILE *output;
+
+  particle **particles;
+  graviton **gravity;
+};
+
+universe *universeCreate(particle **particles) {
+  universe *self = malloc(sizeof(universe));
+  
+  self->age = 0;
+  self->output = stdout;
+  
+  self->particles = particles;
+  self->gravity = createGravitons(particles, -1, NULL);
+  
+  return self;
+}
+
+void universeDestroy(universe *self) {
+  int i;
+  particle *p;
+  
+  while((p = self->particles[i++])) {
+    free(p);
+  }
+  
+  free(self->particles);
+  
+  destroyGravitons(self->gravity);
+  
+  free(self);
+}
+
+
+int universeIterate(universe *self) {
+  self->age++;
+  
+  applyGravitons(self->gravity);
+  advanceParticles(self->particles);
+  
+  fprintf(self->output, "frame # %d\n", self->age);
+  printParticles(self->output, self->particles);
+  fprintf(self->output, "\n");
+  
+  return self->age;
+}
+
 
 graviton *gravitonCreate(particle *a, particle *b) {
   graviton *self = malloc(sizeof(graviton));
@@ -51,6 +102,13 @@ void gravitonApply(graviton *self) {
   free(g);
 }
 
+void applyGravitons(graviton **self) {
+  while (*self) {
+    gravitonApply(*(self++));
+  }
+}
+
+
 graviton **createGravitons(particle **particles, int count, int *gCount) {
   if (count < 0) {
     for (int i = 0; ; i++) {
@@ -64,7 +122,8 @@ graviton **createGravitons(particle **particles, int count, int *gCount) {
   int g_count = count - 1;
   g_count = (1 + g_count)*(g_count / 2.0);
   
-  *gCount = g_count;
+  if (gCount)
+    *gCount = g_count;
   
   graviton **retval = calloc(g_count + 1, sizeof(graviton *));
   
@@ -79,3 +138,13 @@ graviton **createGravitons(particle **particles, int count, int *gCount) {
   return retval;
 }
 
+void destroyGravitons(graviton **self) {
+  int i = 0;
+  graviton *g;
+  
+  while ((g = self[i++])) {
+    free(g);
+  }
+  
+  free(self);
+}
