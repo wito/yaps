@@ -30,12 +30,16 @@
 #include "world.h"
 
 struct universe {
+  int age;
+
   particle **particles;
   graviton **gravity;
 };
 
 universe *universeCreate(particle **particles) {
   universe *self = malloc(sizeof(universe));
+  
+  self->age = 0;
   
   self->particles = particles;
   self->gravity = createGravitons(particles, -1, NULL);
