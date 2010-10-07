@@ -53,14 +53,10 @@ int main (int argc, const char **argv) {
   for (int t = 0; t < 5; t++) {
     applyGravitons(G);
     
-    particleAdvance(A);
-    particleAdvance(B);
-    particleAdvance(C);
+    advanceParticles(particles);
   
     fprintf(stdout, "frame # %d\n", t);
-    particlePrint(stdout, A, 0);
-    particlePrint(stdout, B, 1);
-    particlePrint(stdout, C, 2);
+    printParticles(stdout, particles);
     fprintf(stdout, "\n");
   }
   
