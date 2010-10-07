@@ -80,3 +80,13 @@ graviton **createGravitons(particle **particles, int count, int *gCount) {
   return retval;
 }
 
+void destroyGravitons(graviton **self) {
+  int i = 0;
+  graviton *g;
+  
+  while ((g = self[i++])) {
+    free(g);
+  }
+  
+  free(self);
+}

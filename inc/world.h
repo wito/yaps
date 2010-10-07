@@ -39,6 +39,7 @@ graviton *gravitonCreate(particle *, particle *);
 void gravitonDestroy(graviton *);
 
 graviton **createGravitons(particle **, int, int *);
+void destroyGravitons(graviton **);
 
 void gravitonApply(graviton *);
 
