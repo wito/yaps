@@ -32,11 +32,12 @@
 #include "world.h"
 
 int main (int argc, const char **argv) {
-  particle **particles = calloc(3, sizeof(particle *));
+  particle **particles = calloc(4, sizeof(particle *));
   
   particles[0] = particleCreate(vectorCreate( 3.0,  0.0, 0.0), vectorCreate( 0.0,  0.005, 0.0), 5.0);
   particles[1] = particleCreate(vectorCreate( 0.0,  0.0, 0.0), vectorCreate( 0.0,  0.0, 0.0), 15.0);
   particles[2] = particleCreate(vectorCreate(-3.0,  0.0, 0.0), vectorCreate( 0.0, -0.005, 0.0), 5.0);
+  particles[3] = NULL;
   
   particle *A, *B, *C;
   
