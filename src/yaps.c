@@ -39,22 +39,11 @@ int main (int argc, const char **argv) {
   particles[2] = particleCreate(vectorCreate(-3.0,  0.0, 0.0), vectorCreate( 0.0, -0.005, 0.0), 5.0);
   particles[3] = NULL;
   
-  int g_count;
-  graviton **G = createGravitons(particles, 3, &g_count);
+  universe *universe = universeCreate(particles);
   
-  //printf("%d, g_count\n", g_count);
-
   for (int t = 0; t < 5; t++) {
-    applyGravitons(G);
-    
-    advanceParticles(particles);
-  
-    fprintf(stdout, "frame # %d\n", t);
-    printParticles(stdout, particles);
-    fprintf(stdout, "\n");
+    universeIterate(universe);
   }
-  
-  printf("\n");
   
   return 0;
 }
