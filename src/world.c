@@ -79,6 +79,10 @@ int universeIterate(universe *self) {
   return self->age;
 }
 
+void universeSetOutput(universe *self, FILE *fp) {
+  self->output = fp;
+}
+
 
 graviton *gravitonCreate(particle *a, particle *b) {
   graviton *self = malloc(sizeof(graviton));
