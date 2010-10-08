@@ -27,11 +27,42 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "particle.h"
 #include "world.h"
 
+#ifndef ITERATIONS
+#define ITERATIONS 5
+#endif
+
 int main (int argc, const char **argv) {
+  int iterations = ITERATIONS;
+  const char *input_path = NULL;
+  const char *output_path = NULL;
+  
+  for (int i = 1; i < argc; i++) {
+    const char *clswitch = argv[i];
+    
+    if (!strncmp(clswitch, "-", 1)) {
+      const char *argument = argv[++i];
+      if (!argument) {
+        fprintf(stderr, "setting %s given without argument\n", clswitch);
+        exit(1);
+      }
+      
+      if (!strcmp(clswitch, "-i") || !strcmp(clswitch, "--iterations")) {
+        iterations = strtol(argument, NULL, 10);
+      } else if (!strcmp(clswitch, "-o") || !strcmp(clswitch, "--output")) {
+        output_path = argument;
+      }
+      
+    } else {
+      input_path = clswitch;
+      break;
+    }
+  }
+  
   particle **particles = calloc(4, sizeof(particle *));
   
   particles[0] = particleCreate(vectorCreate( 3.0,  0.0, 0.0), vectorCreate( 0.0,  0.005, 0.0), 5.0);
@@ -41,7 +72,12 @@ int main (int argc, const char **argv) {
   
   universe *universe = universeCreate(particles);
   
-  for (int t = 0; t < 5; t++) {
+  if (output_path) {
+    FILE *out = fopen(output_path, "wb");
+    universeSetOutput(universe, out);
+  }
+  
+  for (int t = 0; t < iterations; t++) {
     universeIterate(universe);
   }
   

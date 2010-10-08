@@ -1,3 +1,7 @@
 YAPS (Yet Another Particle Simulator)
 
 YAPS is a toy for simulating the movement of particles. Go figure.
+
+Usage
+
+yaps [-i|--iterations n] [-o|--output file] [input]

@@ -62,6 +62,10 @@ void universeDestroy(universe *self) {
   
   destroyGravitons(self->gravity);
   
+  if (self->output != stdin) {
+    fclose(self->output);
+  }
+  
   free(self);
 }
 
@@ -77,6 +81,10 @@ int universeIterate(universe *self) {
   fprintf(self->output, "\n");
   
   return self->age;
+}
+
+void universeSetOutput(universe *self, FILE *fp) {
+  self->output = fp;
 }
 
 
