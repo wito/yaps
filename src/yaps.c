@@ -27,6 +27,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 
 #include "particle.h"
 #include "world.h"
@@ -37,6 +38,10 @@
 
 int main (int argc, const char **argv) {
   int iterations = ITERATIONS;
+  
+  if (argc > 2 && !strncmp(argv[1], "-i", 2)) {
+    iterations = strtol(argv[2], NULL, 10);
+  }
   
   particle **particles = calloc(4, sizeof(particle *));
   
