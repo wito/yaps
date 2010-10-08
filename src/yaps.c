@@ -38,9 +38,28 @@
 
 int main (int argc, const char **argv) {
   int iterations = ITERATIONS;
+  const char *input_path = NULL;
   
-  if (argc > 2 && (!strncmp(argv[1], "-i", 2) || !strncmp(argv[1], "--iterations", 12))) {
-    iterations = strtol(argv[2], NULL, 10);
+  for (int i = 1; i < argc; i++) {
+    const char *clswitch = argv[i];
+    
+    if (!strncmp(clswitch, "-", 1)) {
+      const char *argument = argv[++i];
+      if (!argument) {
+        fprintf(stderr, "setting %s given without argument\n", clswitch);
+        exit(1);
+      }
+      
+      if (!strcmp(clswitch, "-i") || !strcmp(clswitch, "--iterations")) {
+        iterations = strtol(argument, NULL, 10);
+      } else if (!strcmp(clswitch, "-o") || !strcmp(clswitch, "--output")) {
+        fprintf(stderr, "Warning: output direction not implemented\n");
+      }
+      
+    } else {
+      input_path = clswitch;
+      break;
+    }
   }
   
   particle **particles = calloc(4, sizeof(particle *));
