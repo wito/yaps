@@ -37,9 +37,9 @@
 
     <div class="download">
       <a href="http://github.com/wito/yaps/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png"></a>
+        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png" /></a>
       <a href="http://github.com/wito/yaps/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png"></a>
+        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png" /></a>
     </div>
 
     <h1><a href="http://github.com/wito/yaps">yaps</a>
