@@ -1,5 +1,5 @@
   * Determine the speed of light
   * Implement magnetism
-  * Support for number of iterations as a configuration parameter or command line switch
   * Support reading of state as configuration parameters from a text file (format to be researched)
+  * Research option for parallellization of particle simulation
   * And a bunch of other things...
