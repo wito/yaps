@@ -1,58 +1,42 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
-<head>
-  <title>wito/yaps @ GitHub</title>  
-</head>
-
-<body>
-  <a href="http://github.com/wito/yaps"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
-
-  <div id="container">
-    <div class="download">
-      <a href="http://github.com/wito/yaps/zipball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/zip.png" /></a>
-      <a href="http://github.com/wito/yaps/tarball/master">
-        <img border="0" width="90" src="http://github.com/images/modules/download/tar.png" /></a>
+  <head>
+    <title>wito/yaps @ GitHub</title>
+    <link rel="stylesheet" type="text/css" href="/css/style.css" />
+  </head>
+  <body>
+    <a href="http://github.com/wito/yaps"><img style="position: absolute; top: 0; right: 0; border: 0;" src="http://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" /></a>
+    <div id="container">
+      <div class="download">
+        <a href="http://github.com/wito/yaps/zipball/master"><img border="0" src="http://github.com/images/modules/download/zip.png" /></a>
+        <a href="http://github.com/wito/yaps/tarball/master"><img border="0" src="http://github.com/images/modules/download/tar.png" /></a>
+      </div>
+      <h1>Yet Another Particle Simulator</h1>
+      <p>A toy for simulating particles. Go figure.</p>
+      <h2>Install and Run</h2>
+<pre>
+sh BUILD.sh
+./yaps --iterations 15 --output yaps-output.txt
+</pre>
+      <h2>License</h2>
+      <p>BSD Revised</p>
+      <h2>Authors</h2>
+      <p>Williham Totland (wito@eyego.no)</p>
+      <h2>Contact</h2>
+      <p>Williham Totland (wito@eyego.no)</p>
+      <h2>Download</h2>
+      <p>
+        You can download this project in either
+        <a href="http://github.com/wito/yaps/zipball/master">zip</a> or
+        <a href="http://github.com/wito/yaps/tarball/master">tar</a> formats.
+      </p>
+      <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
+        by running:
+        <pre>$ git clone git://github.com/wito/yaps</pre>
+      </p>
+      <div class="footer">
+        get the source code on GitHub : <a href="http://github.com/wito/yaps">wito/yaps</a>
+      </div>
     </div>
-    <h1><a href="http://github.com/wito/yaps">yaps</a> by <a href="http://github.com/wito">wito</a></span></h1>
-
-    <div class="description">
-      Yet Another Particle Simulator
-    </div>
-
-    <p>A toy for simulating particles. Go figure.</p><h2>Dependencies</h2>
-<p>libc</p>
-<h2>Install</h2>
-<p>sh BUILD.sh
-./yaps</p>
-<h2>License</h2>
-<p>BSD Revised</p>
-<h2>Authors</h2>
-<p>Williham Totland (wito@eyego.no)
-<br/>
-<br/>      </p>
-<h2>Contact</h2>
-<p>Williham Totland (wito@eyego.no)
-<br/>      </p>
-
-
-    <h2>Download</h2>
-    <p>
-      You can download this project in either
-      <a href="http://github.com/wito/yaps/zipball/master">zip</a> or
-      <a href="http://github.com/wito/yaps/tarball/master">tar</a> formats.
-    </p>
-    <p>You can also clone the project with <a href="http://git-scm.com">Git</a>
-      by running:
-      <pre>$ git clone git://github.com/wito/yaps</pre>
-    </p>
-
-    <div class="footer">
-      get the source code on GitHub : <a href="http://github.com/wito/yaps">wito/yaps</a>
-    </div>
-
-  </div>
-
-  
-</body>
+  </body>
 </html>
