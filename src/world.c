@@ -62,6 +62,10 @@ void universeDestroy(universe *self) {
   
   destroyGravitons(self->gravity);
   
+  if (self->output != stdin) {
+    fclose(self->output);
+  }
+  
   free(self);
 }
 
