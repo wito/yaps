@@ -39,6 +39,7 @@
 int main (int argc, const char **argv) {
   int iterations = ITERATIONS;
   const char *input_path = NULL;
+  const char *output_path = NULL;
   
   for (int i = 1; i < argc; i++) {
     const char *clswitch = argv[i];
@@ -53,7 +54,7 @@ int main (int argc, const char **argv) {
       if (!strcmp(clswitch, "-i") || !strcmp(clswitch, "--iterations")) {
         iterations = strtol(argument, NULL, 10);
       } else if (!strcmp(clswitch, "-o") || !strcmp(clswitch, "--output")) {
-        fprintf(stderr, "Warning: output direction not implemented\n");
+        output_path = argument;
       }
       
     } else {
@@ -70,6 +71,11 @@ int main (int argc, const char **argv) {
   particles[3] = NULL;
   
   universe *universe = universeCreate(particles);
+  
+  if (output_path) {
+    FILE *out = fopen(output_path, "wb");
+    universeSetOutput(universe, out);
+  }
   
   for (int t = 0; t < iterations; t++) {
     universeIterate(universe);
