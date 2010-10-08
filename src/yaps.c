@@ -39,7 +39,7 @@
 int main (int argc, const char **argv) {
   int iterations = ITERATIONS;
   
-  if (argc > 2 && !strncmp(argv[1], "-i", 2)) {
+  if (argc > 2 && (!strncmp(argv[1], "-i", 2) || !strncmp(argv[1], "--iterations", 12))) {
     iterations = strtol(argv[2], NULL, 10);
   }
   
