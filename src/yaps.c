@@ -81,6 +81,8 @@ int main (int argc, const char **argv) {
   while ((line = findline(input))) {
     ConfigAction action = configAction(line);
     
+    char **args = NULL;
+    
     switch (action) {
       case ParticleAction:
         particles[p_count++] = particleParse(input);
@@ -93,6 +95,11 @@ int main (int argc, const char **argv) {
       case UnknownConfigAction:
       default:
         break;
+    }
+    
+    if (args) {
+      free(args[0]);
+      free(args);
     }
     
     free(line);
