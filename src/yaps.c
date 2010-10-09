@@ -77,7 +77,7 @@ int main (int argc, const char **argv) {
     free(input_path);
   }
   
-  char *line;
+  char *line = NULL;
   while ((line = findline(input))) {
     ConfigAction action = configAction(line);
     
@@ -97,8 +97,11 @@ int main (int argc, const char **argv) {
     
     free(line);
   }
+    
+  fclose(input);
 
   universe *universe = universeCreate(particles);
+  particles = NULL;
   
   if (output_path) {
     FILE *out = fopen(output_path, "wb");
@@ -111,6 +114,7 @@ int main (int argc, const char **argv) {
   }
   
   universeDestroy(universe);
+  universe = NULL;
   
   return 0;
 }

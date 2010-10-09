@@ -38,8 +38,10 @@ char *findline(FILE *stream) {
   
   int status = getline(&line, &l, stream);
   
-  if (status == -1)
+  if (status == -1) {
+    free(line);
     return NULL;
+  }
   
   if (line[0] == '\n') {
     free(line);
