@@ -9,7 +9,7 @@ ODIR=obj
 _TEST = 
 TEST = $(patsubst %,$(TODIR)/%.test,$(_TEST))
 
-_OBJ = yaps.o vector.o particle.o world.o
+_OBJ = yaps.o vector.o particle.o world.o parser.o
 OBJ = $(patsubst %,$(ODIR)/%,$(_OBJ))
 
 yaps: $(OBJ)
