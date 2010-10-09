@@ -59,3 +59,21 @@ char *findline(FILE *stream) {
   
   return line;
 }
+
+ConfigAction configAction(const char *line) {
+  if (!strncmp(line, "particle", 8)) {
+    return ParticleAction;
+  } else if (!strncmp(line, "iterations", 10)) {
+    return IterationsConfig;
+  } else if (!strncmp(line, "output", 6)) {
+    return OutputConfig;
+  } else if (!strncmp(line, "input", 5)) {
+    return InputConfig;
+  } else {
+    return UnknownConfigAction;
+  }
+}
+
+char **configArguments(const char *line) {
+  return NULL;
+}

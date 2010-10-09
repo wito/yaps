@@ -28,8 +28,19 @@
 #ifndef PARSER_H
 #define PARSER_H
 
+typedef enum {
+  UnknownConfigAction = 0,
+  ParticleAction,
+  IterationsConfig,
+  OutputConfig,
+  InputConfig
+} ConfigAction;
+
 #include <stdio.h>
 
 char *findline(FILE *);
+
+ConfigAction configAction(const char *);
+char **configArguments(const char *);
 
 #endif // PARSER_H
