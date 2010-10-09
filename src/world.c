@@ -51,7 +51,7 @@ universe *universeCreate(particle **particles) {
 }
 
 void universeDestroy(universe *self) {
-  int i;
+  int i = 0;
   particle *p;
   
   while((p = self->particles[i++])) {
