@@ -77,5 +77,14 @@ ConfigAction configAction(const char *line) {
 }
 
 char **configArguments(const char *line) {
-  return NULL;
+  char **retval = calloc(7, sizeof(char *));
+  char *lcp = strdup(line);
+  char *token = NULL;
+  int i = 0;
+  
+  while ((token = strsep(&lcp, "\n "))) {
+    retval[i++] = token;
+  }
+  
+  return retval;
 }
