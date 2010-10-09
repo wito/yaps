@@ -92,6 +92,12 @@ int main (int argc, const char **argv) {
         }
         particles[p_count] = NULL;
         break;
+      case IterationsConfig:
+        args = configArguments(line);
+        
+        iterations = strtol(args[1], NULL, 10);
+        
+        break;
       case UnknownConfigAction:
       default:
         break;
