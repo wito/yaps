@@ -41,6 +41,8 @@ typedef struct {
 particle *particleCreate (vector, vector, double);
 void particleDestroy (particle *);
 
+particle *particleParse (FILE *);
+
 double particleMass(particle *);
 
 void particleApplyForce (particle *, vector);

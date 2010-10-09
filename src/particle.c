@@ -28,6 +28,7 @@
 #include <stdlib.h>
 
 #include "particle.h"
+#include "parser.h"
 
 particle *particleCreate (vector p, vector v, double m) {
   particle *self = malloc(sizeof(particle));
@@ -41,6 +42,26 @@ particle *particleCreate (vector p, vector v, double m) {
 
 void particleDestroy (particle *self) {
   return free(self);
+}
+
+
+particle *particleParse (FILE *stream) {
+  vector p, v;
+  double m;
+  
+  char *line = findline(stream);
+  p = vectorParse(line);
+  free(line);
+  
+  line = findline(stream);
+  v = vectorParse(line);
+  free(line);
+  
+  line = findline(stream);
+  sscanf(line, " %lf", &m);
+  free(line);
+  
+  return particleCreate(p,v,m);
 }
 
 
