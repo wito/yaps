@@ -25,21 +25,28 @@
  *
  */
 
+#define _GNU_SOURCE
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
 
 #include "particle.h"
 #include "world.h"
+#include "parser.h"
 
 #ifndef ITERATIONS
 #define ITERATIONS 5
 #endif
 
 int main (int argc, const char **argv) {
+  int p_count = 0;
+  int p_cap = 8;
+  particle **particles = malloc(p_cap * sizeof(particle *));
+  particles[0] = NULL;
+
   int iterations = ITERATIONS;
-  const char *input_path = NULL;
-  const char *output_path = NULL;
+  char *input_path = NULL;
+  char *output_path = NULL;
   
   for (int i = 1; i < argc; i++) {
     const char *clswitch = argv[i];
@@ -54,32 +61,56 @@ int main (int argc, const char **argv) {
       if (!strcmp(clswitch, "-i") || !strcmp(clswitch, "--iterations")) {
         iterations = strtol(argument, NULL, 10);
       } else if (!strcmp(clswitch, "-o") || !strcmp(clswitch, "--output")) {
-        output_path = argument;
+        output_path = strdup(argument);
       }
       
     } else {
-      input_path = clswitch;
+      input_path = strdup(clswitch);
       break;
     }
   }
   
-  particle **particles = calloc(4, sizeof(particle *));
+  FILE *input = stdin;
   
-  particles[0] = particleCreate(vectorCreate( 3.0,  0.0, 0.0), vectorCreate( 0.0,  0.005, 0.0), 5.0);
-  particles[1] = particleCreate(vectorCreate( 0.0,  0.0, 0.0), vectorCreate( 0.0,  0.0, 0.0), 15.0);
-  particles[2] = particleCreate(vectorCreate(-3.0,  0.0, 0.0), vectorCreate( 0.0, -0.005, 0.0), 5.0);
-  particles[3] = NULL;
+  if (input_path) {
+    input = fopen(input_path,"rb");
+    free(input_path);
+  }
   
+  char *line;
+  while ((line = findline(input))) {
+    ConfigAction action = configAction(line);
+    
+    switch (action) {
+      case ParticleAction:
+        particles[p_count++] = particleParse(input);
+        if (p_count == p_cap) {
+          p_cap += 8;
+          particles = realloc(particles, p_cap * sizeof(particle *));
+        }
+        particles[p_count] = NULL;
+        break;
+      case UnknownConfigAction:
+      default:
+        break;
+    }
+    
+    free(line);
+  }
+
   universe *universe = universeCreate(particles);
   
   if (output_path) {
     FILE *out = fopen(output_path, "wb");
     universeSetOutput(universe, out);
+    free(output_path);
   }
   
   for (int t = 0; t < iterations; t++) {
     universeIterate(universe);
   }
+  
+  universeDestroy(universe);
   
   return 0;
 }
