@@ -28,9 +28,18 @@
 #include "vector.h"
 
 #include <math.h>
+#include <stdio.h>
 
 vector vectorCreate(double x, double y, double z) {
   return (vector){ x, y, z };
+}
+
+vector vectorParse(const char *line) {
+  double x, y, z;
+  
+  sscanf(line, " %lf %lf %lf", &x, &y, &z);
+  
+  return vectorCreate(x,y,z);
 }
 
 

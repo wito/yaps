@@ -35,6 +35,7 @@ typedef struct {
 } vector;
 
 vector vectorCreate(double, double, double);
+vector vectorParse(const char *);
 
 double vectorLength(vector);
 vector vectorUnit(vector);
