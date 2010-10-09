@@ -27,6 +27,8 @@
 
 #define _GNU_SOURCE
 #include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
 
 #include "parser.h"
 
@@ -36,9 +38,24 @@ char *findline(FILE *stream) {
   
   int status = getline(&line, &l, stream);
   
-  if (status != -1) {
-    return line;
-  } else {
+  if (status == -1)
     return NULL;
-	}
+  
+  if (line[0] == '\n') {
+    free(line);
+    return findline(stream);
+  }
+  
+  char *comment = strchr(line, '#');
+  if (comment) {
+    if (comment == line) {
+      free(line);
+      return findline(stream);
+  	} else {
+      *comment = '\0';
+      *(--comment) = '\n';
+    }
+  }
+  
+  return line;
 }
