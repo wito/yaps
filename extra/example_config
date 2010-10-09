@@ -1,0 +1,19 @@
+# example config
+# run with ./yaps extra/example_config
+iterations 10
+output example_config.out.txt
+particle
+# position
+       3.00000    0.00000    0.00000
+# velocity
+       0.00000    0.00500    0.00000
+# mass
+       5.00000
+particle
+       0.00000    0.00000    0.00000
+       0.00000    0.00000    0.00000
+      15.00000
+particle
+      -3.00000    0.00000    0.00000
+       0.00000   -0.00500    0.00000
+       5.00000
