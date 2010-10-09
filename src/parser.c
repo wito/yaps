@@ -83,6 +83,9 @@ char **configArguments(const char *line) {
   int i = 0;
   
   while ((token = strsep(&lcp, "\n "))) {
+    if (i == 6) {
+      fprintf(stderr, "Malformed configuration file; too many arguments at %s", line);
+    }
     retval[i++] = token;
   }
   
