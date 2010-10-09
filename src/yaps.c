@@ -98,6 +98,13 @@ int main (int argc, const char **argv) {
         iterations = strtol(args[1], NULL, 10);
         
         break;
+      case OutputConfig:
+        args = configArguments(line);
+        
+        free(output_path);
+        output_path = strdup(args[1]);
+        
+        break;
       case UnknownConfigAction:
       default:
         break;
