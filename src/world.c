@@ -30,9 +30,21 @@
 
 #include "world.h"
 
+void universeOutput(int frame, particle **particles, void *context) {
+  FILE *output = context;
+  
+  fprintf(output, "frame # %d\n", frame);
+  printParticles(output, particles);
+  fprintf(output, "\n");
+}
+
+
 struct universe {
   int age;
   FILE *output;
+
+  universe_output_fn_t outputFunction;
+  void *outputContext;
 
   particle **particles;
   graviton **gravity;
@@ -43,6 +55,9 @@ universe *universeCreate(particle **particles) {
   
   self->age = 0;
   self->output = stdout;
+  
+  self->outputFunction = &universeOutput;
+  self->outputContext = stdout;
   
   self->particles = particles;
   self->gravity = createGravitons(particles, -1, NULL);
@@ -76,15 +91,14 @@ int universeIterate(universe *self) {
   applyGravitons(self->gravity);
   advanceParticles(self->particles);
   
-  fprintf(self->output, "frame # %d\n", self->age);
-  printParticles(self->output, self->particles);
-  fprintf(self->output, "\n");
+  universeOutput(self->age, self->particles, self->output);
   
   return self->age;
 }
 
 void universeSetOutput(universe *self, FILE *fp) {
   self->output = fp;
+  self->outputContext = fp;
 }
 
 

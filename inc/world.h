@@ -31,6 +31,7 @@
 #include "particle.h"
 
 typedef struct universe universe;
+typedef void (*universe_output_fn_t)(int, particle **, void*);
 
 typedef struct {
   particle *a;
