@@ -42,6 +42,7 @@ universe *universeCreate(particle **);
 void universeDestroy(universe *);
 
 void universeSetOutput(universe *, FILE *);
+void universeSetOutputFunction(universe *, universe_output_fn_t, void *);
 
 int universeIterate(universe *);
 
