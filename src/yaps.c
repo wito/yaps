@@ -123,11 +123,14 @@ int main (int argc, const char **argv) {
   universe *universe = universeCreate(particles);
   particles = NULL;
   
+  FILE *out = stdout;
+  
   if (output_path) {
-    FILE *out = fopen(output_path, "wb");
-    universeSetOutput(universe, out);
+    out = fopen(output_path, "wb");
     free(output_path);
   }
+  
+  universeSetOutput(universe, out);
   
   for (int t = 0; t < iterations; t++) {
     universeIterate(universe);
@@ -135,6 +138,10 @@ int main (int argc, const char **argv) {
   
   universeDestroy(universe);
   universe = NULL;
+  
+  if (out != stdout) {
+    fclose(out);
+  }
   
   return 0;
 }
