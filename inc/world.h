@@ -31,7 +31,10 @@
 #include "particle.h"
 
 typedef struct universe universe;
+
+typedef void (*universe_prep_o_fn_t)(void *);
 typedef void (*universe_output_fn_t)(int, particle **, void *);
+typedef void (*universe_done_o_fn_t)(void *);
 
 typedef struct {
   particle *a;
@@ -44,6 +47,7 @@ void universeDestroy(universe *);
 void universeSetOutput(universe *, FILE *);
 void universeSetOutputFunction(universe *, universe_output_fn_t, void *);
 
+void universeReady(universe *);
 int universeIterate(universe *);
 
 graviton *gravitonCreate(particle *, particle *);

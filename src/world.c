@@ -42,7 +42,9 @@ void universeOutput(int frame, particle **particles, void *context) {
 struct universe {
   int age;
 
+  universe_prep_o_fn_t outputPrepare;
   universe_output_fn_t outputFunction;
+  universe_done_o_fn_t outputDone;
   void *outputContext;
 
   particle **particles;
@@ -54,7 +56,9 @@ universe *universeCreate(particle **particles) {
   
   self->age = 0;
   
+  self->outputPrepare = NULL;
   self->outputFunction = &universeOutput;
+  self->outputDone = NULL;
   self->outputContext = stdout;
   
   self->particles = particles;
@@ -75,9 +79,19 @@ void universeDestroy(universe *self) {
   
   destroyGravitons(self->gravity);
   
+  if (self->outputDone) {
+    self->outputDone(self->outputContext);
+  }
+  
   free(self);
 }
 
+
+void universeReady(universe *self) {
+  if (self->outputPrepare) {
+    self->outputPrepare(self->outputContext);
+  }
+}
 
 int universeIterate(universe *self) {
   self->age++;
