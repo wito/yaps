@@ -105,12 +105,22 @@ int universeIterate(universe *self) {
 }
 
 void universeSetOutput(universe *self, FILE *fp) {
-  universeSetOutputFunction(self, &universeOutput, fp);
+  universeSetOutputFunction(self, NULL, &universeOutput, NULL, fp);
 }
 
-void universeSetOutputFunction(universe *self, universe_output_fn_t function, void *context) {
+void universeSetOutputFunction(universe *self, universe_prep_o_fn_t ready, universe_output_fn_t function, universe_done_o_fn_t done, void *context) {
+  if (self->outputDone) {
+    self->outputDone(self->outputContext);
+  }
+  
+  self->outputPrepare = ready;
   self->outputFunction = function;
+  self->outputDone = done;
   self->outputContext = context;
+  
+  if (self->outputPrepare) {
+    self->outputPrepare(self->outputContext);
+  }
 }
 
 
